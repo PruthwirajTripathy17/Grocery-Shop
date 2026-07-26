@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node backend/index.js",
     "dev": "nodemon backend/index.js",
-    "build": "npm install && cd frontend && npm install --legacy-peer-deps && npm run build"
+    "build": "npm install && cd frontend && npm install --legacy-peer-deps && BUILD_PATH=dist npm run build"
   },
   "author": "",
   "license": "ISC",

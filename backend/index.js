@@ -63,9 +63,14 @@ app.use("/api/product", productRoute);
 app.use("/api/category", categoryRoute);
 
 //Access Front End Static Files
-app.use(express.static(path.join(__dirname, "../frontend/build")));
+const fs = require("fs");
+const buildPath = fs.existsSync(path.join(__dirname, "../frontend/dist"))
+  ? path.join(__dirname, "../frontend/dist")
+  : path.join(__dirname, "../frontend/build");
+
+app.use(express.static(buildPath));
 
 //Access Front End All URL
 app.get("/*", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "../frontend/build/index.html"));
+  res.sendFile(path.resolve(buildPath, "index.html"));
 });
