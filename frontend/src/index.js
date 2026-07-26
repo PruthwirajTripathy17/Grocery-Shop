@@ -1,10 +1,16 @@
 import React from "react";
 import { Analytics } from "@vercel/analytics/react";
 import ReactDOM from "react-dom/client";
+import axios from "axios";
 import App from "./App";
 import { Provider } from "react-redux";
 import Store from "./Redux/Store";
 import reportWebVitals from "./reportWebVitals";
+
+axios.defaults.baseURL = process.env.NODE_ENV === "production"
+  ? "https://grocery-shop-backend-gjr3.onrender.com"
+  : "";
+axios.defaults.withCredentials = true;
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
