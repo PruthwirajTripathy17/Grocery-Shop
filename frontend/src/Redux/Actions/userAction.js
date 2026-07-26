@@ -40,7 +40,12 @@ export const userRegisterAction = (userData) => async (dispatch) => {
     const { data } = await axios.post("api/user/register", userData);
     dispatch({ type: USER_REGISTER_SUCCESS, payload: data });
   } catch (error) {
-    dispatch({ type: USER_REGISTER_FAIL, error: error.response.data.message });
+    dispatch({
+      type: USER_REGISTER_FAIL,
+      error: error.response && error.response.data && error.response.data.message
+        ? error.response.data.message
+        : error.message,
+    });
   }
 };
 
@@ -51,7 +56,12 @@ export const userLoginAction = (userData) => async (dispatch) => {
     const { data } = await axios.post("/api/user/login", userData);
     dispatch({ type: USER_LOGIN_SUCCESS, payload: data });
   } catch (error) {
-    dispatch({ type: USER_LOGIN_FAIL, error: error.response.data.message });
+    dispatch({
+      type: USER_LOGIN_FAIL,
+      error: error.response && error.response.data && error.response.data.message
+        ? error.response.data.message
+        : error.message,
+    });
   }
 };
 
@@ -66,7 +76,9 @@ export const loadUserAction = () => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: LOAD_LOGIN_USER_FAIL,
-      error: error.response.data.message,
+      error: error.response && error.response.data && error.response.data.message
+        ? error.response.data.message
+        : error.message,
     });
   }
 };
@@ -77,7 +89,12 @@ export const logOutUserAction = () => async (dispatch) => {
     const { data } = await axios.get("/api/user/logOut");
     dispatch({ type: LOGOUT_USER_SUCCESS, payload: data });
   } catch (error) {
-    dispatch({ type: LOGOUT_USER_FAIL, error: error.response.data.message });
+    dispatch({
+      type: LOGOUT_USER_FAIL,
+      error: error.response && error.response.data && error.response.data.message
+        ? error.response.data.message
+        : error.message,
+    });
   }
 };
 
@@ -89,7 +106,9 @@ export const userPasswordUpdateAction = (userData) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: USER_PASSWORD_UPDATE_FAIL,
-      error: error.response.data.message,
+      error: error.response && error.response.data && error.response.data.message
+        ? error.response.data.message
+        : error.message,
     });
   }
 };
@@ -104,7 +123,9 @@ export const restPasswordSendEmailAction = (email) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: SEND_PASSWORD_REST_EMAIL_FAIL,
-      error: error.response.data.message,
+      error: error.response && error.response.data && error.response.data.message
+        ? error.response.data.message
+        : error.message,
     });
   }
 };
@@ -124,7 +145,9 @@ export const restPasswordAction =
     } catch (error) {
       dispatch({
         type: USER_PASSWORD_REST_FAIL,
-        error: error.response.data.message,
+        error: error.response && error.response.data && error.response.data.message
+          ? error.response.data.message
+          : error.message,
       });
     }
   };
@@ -137,7 +160,9 @@ export const getAllUsersAdminAction = () => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: GET_ALL_USERS_FAIL,
-      error: error.response.data.message,
+      error: error.response && error.response.data && error.response.data.message
+        ? error.response.data.message
+        : error.message,
     });
   }
 };
@@ -148,7 +173,12 @@ export const deleteUserAdminAction = (userId) => async (dispatch) => {
     const { data } = await axios.delete(`/api/user/admin/user/${userId}`);
     dispatch({ type: DELETE_USER_SUCCESS, payload: data });
   } catch (error) {
-    dispatch({ type: DELETE_USER_FAIL, error: error.response.data.message });
+    dispatch({
+      type: DELETE_USER_FAIL,
+      error: error.response && error.response.data && error.response.data.message
+        ? error.response.data.message
+        : error.message,
+    });
   }
 };
 
@@ -160,10 +190,11 @@ export const adminUpdateUserAction = (userId, UserRole) => async (dispatch) => {
     });
     dispatch({ type: UPDATE_USER_ROLE_SUCCESS, payload: data });
   } catch (error) {
-    // console.log(error.response.data.message);
     dispatch({
       type: UPDATE_USER_ROLE_FAIL,
-      error: error.response.data.message,
+      error: error.response && error.response.data && error.response.data.message
+        ? error.response.data.message
+        : error.message,
     });
   }
 };

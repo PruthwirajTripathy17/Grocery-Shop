@@ -22,7 +22,9 @@ export const getUsersOrdersAction = (userId) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: GET_USER_ORDERS_FAIL,
-      error: error.response.data.message,
+      error: error.response && error.response.data && error.response.data.message
+        ? error.response.data.message
+        : error.message,
     });
     // console.log(error);
   }
@@ -36,7 +38,9 @@ export const getUsersOrderDetailsAction = (orderId) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: GET_USER_ORDERS_DETAILS_FAIL,
-      error: error.response.data.message,
+      error: error.response && error.response.data && error.response.data.message
+        ? error.response.data.message
+        : error.message,
     });
     // console.log(error);
   }
@@ -50,7 +54,9 @@ export const getAllOrdersAdminAction = () => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: GET_ALL_ORDERS_ADMIN_FAIL,
-      error: error.response.data.message,
+      error: error.response && error.response.data && error.response.data.message
+        ? error.response.data.message
+        : error.message,
     });
   }
 };
@@ -66,7 +72,9 @@ export const updateOrdersAdminAction =
     } catch (error) {
       dispatch({
         type: UPDATE_ORDER_ADMIN_FAIL,
-        error: error.response.data.message,
+        error: error.response && error.response.data && error.response.data.message
+          ? error.response.data.message
+          : error.message,
       });
     }
   };

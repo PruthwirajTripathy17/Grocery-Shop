@@ -25,7 +25,12 @@ export const AddProductsAction = (formData) => async (dispatch) => {
     const { data } = await axios.post("/api/product/add", formData);
     dispatch({ type: ADD_PRODUCT_SUCCESS, payload: data });
   } catch (error) {
-    dispatch({ type: ADD_PRODUCT_FAIL, error: error.response.data.message });
+    dispatch({
+      type: ADD_PRODUCT_FAIL,
+      error: error.response && error.response.data && error.response.data.message
+        ? error.response.data.message
+        : error.message,
+    });
   }
 };
 
@@ -50,7 +55,9 @@ export const getAllProductsAction =
     } catch (error) {
       dispatch({
         type: GET_ALL_PRODUCTS_FAIL,
-        error: error.response.data.message,
+        error: error.response && error.response.data && error.response.data.message
+          ? error.response.data.message
+          : error.message,
       });
     }
   };
@@ -61,7 +68,12 @@ export const deleteProductAction = (productId) => async (dispatch) => {
     const { data } = await axios.delete(`/api/product/delete/${productId}`);
     dispatch({ type: DELETE_PRODUCT_SUCCESS, payload: data });
   } catch (error) {
-    dispatch({ type: DELETE_PRODUCT_FAIL, error: error.response.data.message });
+    dispatch({
+      type: DELETE_PRODUCT_FAIL,
+      error: error.response && error.response.data && error.response.data.message
+        ? error.response.data.message
+        : error.message,
+    });
   }
 };
 
@@ -73,10 +85,12 @@ export const getSingleProductAction = (productId) => async (dispatch) => {
     );
     dispatch({ type: GET_SINGLE_PRODUCT_SUCCESS, payload: data });
   } catch (error) {
-    dispatch({
-      type: GET_SINGLE_PRODUCT_FAIL,
-      error: error.response.data.message,
-    });
+      dispatch({
+        type: GET_SINGLE_PRODUCT_FAIL,
+        error: error.response && error.response.data && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+      });
   }
 };
 
@@ -94,7 +108,9 @@ export const updateProductAction =
       // console.log(error);
       dispatch({
         type: UPDATE_PRODUCT_FAIL,
-        error: error.response.data.message,
+        error: error.response && error.response.data && error.response.data.message
+          ? error.response.data.message
+          : error.message,
       });
     }
   };

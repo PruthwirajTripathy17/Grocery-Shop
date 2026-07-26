@@ -22,7 +22,12 @@ export const addCategoryAction = (categoryData) => async (dispatch) => {
     dispatch({ type: ADD_CATEGORY_SUCCESS, payload: data });
   } catch (error) {
     // console.log(error);
-    dispatch({ type: ADD_CATEGORY_FAIL, error: error.response.data.message });
+    dispatch({
+      type: ADD_CATEGORY_FAIL,
+      error: error.response && error.response.data && error.response.data.message
+        ? error.response.data.message
+        : error.message,
+    });
   }
 };
 
@@ -33,7 +38,12 @@ export const getAllCategoryAction = () => async (dispatch) => {
     dispatch({ type: GET_CATEGORY_SUCCESS, payload: data });
   } catch (error) {
     // console.log(error);
-    dispatch({ type: GET_CATEGORY_FAIL, error: error.response.data.message });
+    dispatch({
+      type: GET_CATEGORY_FAIL,
+      error: error.response && error.response.data && error.response.data.message
+        ? error.response.data.message
+        : error.message,
+    });
   }
 };
 
@@ -46,7 +56,9 @@ export const deleteCategoryAction = (categoryId) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: DELETE_CATEGORY_FAIL,
-      error: error.response.data.message,
+      error: error.response && error.response.data && error.response.data.message
+        ? error.response.data.message
+        : error.message,
     });
   }
 };
@@ -65,7 +77,9 @@ export const updateCategoryAction =
       // console.log(error);
       dispatch({
         type: UPDATE_CATEGORY_FAIL,
-        error: error.response.data.message,
+        error: error.response && error.response.data && error.response.data.message
+          ? error.response.data.message
+          : error.message,
       });
     }
   };

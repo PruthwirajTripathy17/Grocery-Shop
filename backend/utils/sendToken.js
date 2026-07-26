@@ -12,6 +12,8 @@ const sendCookie = async (res, statusCode, token, user, message) => {
       Date.now() + process.env.COOKIE_EXPIRE * 24 * 60 * 60 * 1000
     ),
     httpOnly: true,
+    secure: true,
+    sameSite: "none",
   };
   res.cookie("token", token, options);
   res.status(statusCode).json({

@@ -20,7 +20,9 @@ export const getAllReviewsAction = () => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: GET_ALL_REVIEWS_FAIL,
-      error: error.response.data.message,
+      error: error.response && error.response.data && error.response.data.message
+        ? error.response.data.message
+        : error.message,
     });
   }
 };
@@ -33,7 +35,9 @@ export const getAllAdminReviewsAction = () => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: GET_ALL_ADMIN_REVIEWS_FAIL,
-      error: error.response.data.message,
+      error: error.response && error.response.data && error.response.data.message
+        ? error.response.data.message
+        : error.message,
     });
   }
 };
@@ -46,7 +50,9 @@ export const deleteReviewsAction = (reviewId) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: DELETE_REVIEWS_REVIEWS_FAIL,
-      error: error.response.data.message,
+      error: error.response && error.response.data && error.response.data.message
+        ? error.response.data.message
+        : error.message,
     });
   }
 };
