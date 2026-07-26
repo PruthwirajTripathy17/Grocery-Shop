@@ -37,7 +37,7 @@ import axios from "axios";
 export const userRegisterAction = (userData) => async (dispatch) => {
   try {
     dispatch({ type: USER_REGISTER_REQUEST });
-    const { data } = await axios.post("api/user/register", userData);
+    const { data } = await axios.post("/api/user/register", userData);
     dispatch({ type: USER_REGISTER_SUCCESS, payload: data });
   } catch (error) {
     dispatch({
